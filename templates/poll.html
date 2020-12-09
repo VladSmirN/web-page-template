@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+    <title>А ты любишь аниме?</title>
+</head>
+<body>
+<h1>А ты правда любишь аниме? Пройди опрос, наш ИИ скажет!</h1>
+<img src="{{ url_for('static', filename='images/oh-hello-there.webp') }}" alt="SHREK" width="200" height="150">
+<form method="POST" action="/result">
+    {% block poll %}
+        {% if form.errors %}
+            {{ form.errors }}
+        {% endif %}
+        {% for i in range(5) %}
+            <div class="question_block">
+                {% set attr = "question_" + i|string %}
+                <div class="question">{{ form[attr].label }}<br> {{ form[attr] }}</div>
+            </div>
+        {% endfor %}
+        <br>
+        <div class="submit">{{ form.submit }}</div>
+    {% endblock poll %}
+    {{ form.csrf_token() }}
+</form>
+</body>
+</html>
