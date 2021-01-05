@@ -11,7 +11,7 @@ logging.basicConfig(filename=os.path.join("./log",'prediction.log') , level=logg
 log = logging.getLogger('werkzeug')
 log.setLevel(logging.ERROR)
 
-@app.route('/')
+@app.route('/poll')
 def poll():
     poll_form = PollForm()
     return render_template('poll.html', form=poll_form)
